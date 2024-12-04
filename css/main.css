@@ -1,0 +1,136 @@
+@charset "utf-8";
+
+/* body 가로스크롤 방지 */
+body{ overflow-x:hidden;/* 가로를 없애는 거니까 오버플로우 엑스하는거야 */ font-family: "Noto Sans KR", sans-serif; line-height: 1.5;  }
+.inner {width: 1600px; margin: 0 auto;}
+
+
+
+@keyframes rotate {
+  0% {transform: rotate(0);}
+  100% {transform: rotate(360deg);} /* -360 을주면 반대로 가겠지요 */
+}
+
+
+/* header */
+#header::after {z-index: 2; left: calc(50% + 650px); animation: rotate 20s infinite/* 무한반복 */ linear/* 일정한 등속 */; position: absolute;/* 공간이 떨어져야 해 위치를 안주고 일단띄우고 위치값ㅋㅋㅋ 을 줘서 어디에 있느지 확인해 */ top: -100px; content: url(../images/circle_txt.png);}
+/* 순서를 지정해줘야해 앱솔 렐러티브는 이거 안해주면 버튼위로 이미지가 올라가서 안눌러지거든 그래서 순서를 줘야한다.  position: relative; z-index: 2; 버튼에 가서 이거 설정 해줘*/
+
+#header .inner { padding: 20px 0; align-items: center;/* 세로축에서 가운대로 정렬을 한다 안해주면 높낮이가 불안정해서 해주는고야 */ display: flex; justify-content: space-between;}
+
+#header nav { margin-left: auto; /* gnb가 한쪽으로 치우치게 해줌 */ margin-right: 50px; /* 그다음 간격을 준다. */}
+#header .gnb { display: flex; }
+#header .gnb > li { position: relative;}
+#header .gnb > li > a { font-size: 18px; font-weight: 700; display: block; padding: 10px 40px;}
+#header .gnb > li > a:hover {color: #ff9e1a; }
+
+
+#header .gnb > li .depth2 {z-index: 3;/* 슬라이드가 1이니까 순서를 2이상으로 주면 된다. 앱솔룻 선언 되어 있으니 줘도 된다. 쌓아 올린다고 생각 */ display: none; left: calc(50% - 100px); position: absolute; background: #fff; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); width: 200px; padding: 20px 0; }
+/* #header .gnb > li:hover .depth2 {display: block;} */
+#header .gnb > li .depth2 li a {transition: all 0.5s; display: block; padding: 5px 20px; }
+#header .gnb > li .depth2 li a:hover { color: #fff; background: #ff9e1a;}
+
+
+#header .ham {position: relative; z-index: 4; cursor: pointer;/* 이거를 줘야 손가락 모양 링크가 있다는걸 알수 있게 보여준다 */ width: 50px; height: 50px;  border-radius: 50%; box-shadow:5px 5px 15px rgba(0, 0, 0, 0.2); font-size: 0; background: url(../images/ham.svg) no-repeat center center / 36px /* 사이즈값은 / 이거 주고 사이즈  % 비율 주거나 px 을 줘도 된다. */ ;}
+
+
+/* z-index 값을 정해서 줘 안 헷갈릴려면 높은순서대로 쌓인다. */
+
+
+
+
+
+/* main */
+#main h2 {font-weight: 400;/* 명조는 기본굵기로 바꿔야해 그래야 이뻐 */ text-transform: capitalize;/* 단어의 첫글자를 대문자로 바꿔주는 태그 */ font-family: "DM Serif Display", serif;  color:#005ad5 ; font-size: 80px;}
+
+#main h2::before { display: block;/* 인라인 요소라서 */ font-size: 20px; color: #ff9e1a ; content: "auntie anne's";}
+
+#main h2+p { color:#999 ; font-size: 20px; }
+
+/* main _banner */
+.main_banner {text-align: center;}
+
+
+/* menu */
+
+@keyframes swing {
+  0%,100% { transform: rotate(-3deg);}
+  50% { transform: rotate( 3deg);}
+}
+
+.menu { padding: 200px 0; text-align: center;  }
+.menu ul { display: flex; align-items: start/* 높낮이가 불안정해서 위쪽으로 정렬을 해줘야해*** */;}
+.menu ul li { position: relative; text-align: left;/* 중앙배치 되어 있어서 바꿔주는거야  */  width: 50%; display: flex; align-items: center/* 박스를 중앙으로 배치 해주려고 */; }
+.menu ul li:nth-child(2) { margin-top: 100px;}
+
+.menu ul li::before {transition: all 0.5s;  transform: scale(0); position: absolute; left:calc(50% - 240px /* 도형의 크기는 이미지파일가서 크기를 봐 */); top: 0; content: url(../images/circle_dot.png) ;}/* 배경에 동그란거 주는거 */
+.menu ul li:hover::before { transform: scale(1); } /* 가상선택자 중복 되 / 사라졌다가 보여지는 모션이라 transform 은 scale 크기를 호버 전에 0 호버되고 1을 주는거야 */
+
+.menu ul li dl dt {padding-bottom: 30px; font-size: 30px ; font-weight: 700;}
+.menu ul li dl dd { font-size: 18px; color: #999 }
+
+.menu ul li a { animation: swing 2s infinite/* 무한반복 */; }
+
+
+/* brand */
+.brand {position: relative; height: 700px; overflow: hidden;} /* 높이를 고정해서 안보이게 */
+/* 멀티미디어 요소를 배경처럼 화면에 채우는 역할 */
+.brand video { object-fit: cover; width: 100%; height: 100%; /* 부모요소에 맞게 딱! 위스하이트준게 영역을 만들어 줘 */}
+.brand .brand_txt { position: absolute; left: 50%; top: 50%;/* 중앙은 준거 예전엔 크기가 정해져 있어서 된거고 크기를 모르니까 */ transform: translate(-50%,-50%);/* 이걸 처리해줘야 가운데로 간다 */ text-align: center; }
+.brand .brand_txt a {transition: all 0.5s; display: inline-block; margin-top: 50px;}
+.brand .brand_txt a:hover {transform: rotate(90deg) scale(1.1);}
+
+
+/* insta */
+
+.insta { padding: 200px 0 0; text-align: center; }
+.insta ul {/*  display: flex; gap: 50px; slidesPerView 쓸땐 이거랑 저거width 없어도 되 아라서 다됨  */margin-top: 50px; }
+.insta ul li {position: relative; overflow: hidden; border-radius: 50% 50% 0 0;  /* width: calc((100% - 150px) / 4); */}
+.insta ul li img { width: 100%; display: block; }
+.insta ul li a::before { transition: all 0.5s; opacity: 0; position: absolute; left: 0; top: 0; width: 100%; height: 100%; content: ""; background: rgba(0, 0, 0, 0.8) url(../images/insta_fill.png) no-repeat center; }
+
+.insta ul li:hover a::before { opacity: 1;}
+
+
+/* news */
+
+.news {overflow: hidden; position: relative;  background: #eaf4ff; padding: 200px 0; }
+.news .rotate_dot {position: absolute; left: -100px; bottom: -100px; width: 483px; height: 483px; background: url(../images/circle_dot.png); animation: rotate 20s linear infinite ;}
+.news .inner {display: flex;  gap: 50px; }
+.news .news_title { width: 400px;}
+.news .news_title h2{ line-height: 1.2; }
+
+
+.news .event {position: relative; width: 500px; overflow: hidden;}
+.news .event img { width: 100%; display: block;/* 남은 5px 없애기 작업 */ }
+.news .event span {transition: all 0.5s; position: absolute;/* 하면 자동으로 블럭처리를해서 span블럭 처리 안해도되 */ left: 0; bottom: -200px; width: 100%; padding: 30px; background: rgba(0, 0, 0, 0.8); font-size: 20px; color: #fff;}
+.news .event:hover span { bottom: 0;}
+
+
+
+.news .notice { width: 600px;}
+.news .notice li { position: relative; border-top: 1px solid #ddd;padding: 50px 0; font-size: 20px; }
+.news .notice li dl dd { color: #999; padding-top:  10px;}
+
+.news .notice a {transition: all 0.5s; opacity: 0; width: 100%; height: 100%;/* 가로세로 주는 이유는 호시에 사진과 떨어진 부분도 잡히기 때문이야 그래서 가로세로 100% 의 크기를 맞춘거야 */ position: absolute; left: -50px; top: 0; text-align:right;}
+
+
+.news .notice li:hover a { opacity: 1; left: 0; }
+
+
+
+.news .notice img {height: 100%;} /* 이미지 크기가 작아서 높이가 정해져 있으니 한쪽만 100% 주면 비율에 맞게 크기가 조절된다. */
+
+
+
+/* footer */
+
+#footer { text-align: center; color: #fff;}
+#footer .footer_top {background: #005ad5; padding: 50px 0;}
+#footer .sns { display: flex; justify-content: center; margin: 20px 0;}
+#footer .footer_bottom { background: #ff9e1a; padding: 20px 0;}
+
+
+
+
+
